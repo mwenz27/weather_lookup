@@ -2,9 +2,21 @@
 
 {% block content %}
 
-<h1>home page </h1>
-<br>
-{{ api }}
+<h1>Weather Quality </h1>
+{% if api %}
+    {% if api == 'Error ...' %}
+        There is an error, please try again.
+    {% else %}
+    <br>
+    Air Quality :  {{ api.0.AQI }}
+    <br>
+    Area :  {{ api.0.ReportingArea }}
+    <br>
+    Category : {{ api.0.Category.Name }}
+    <br>
+    {% endif %}
+{% endif %}
+
 
 {% endblock %}
 
