@@ -9,8 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <title>Weather Lookup</title>
+
+    <style>
+      .good {background-color: #00CC00 ;}
+      .moderate {background-color: #FFFF00 ;}
+      .sunhealthy {background-color: #FF9900;}
+      .unhealthy {background-color: #FF0000 ;}
+      .vunhealthy {background-color: #990066;}
+      .hazardous {background-color: #660000;}
+    </style>
+
+
   </head>
-  <>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Weather App</a>
@@ -27,9 +37,10 @@
         <li class="nav-item">
 
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      <form action="{% url 'home' %}" class="d-flex" method="POST">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Enter Zipcode" aria-label="Search" name="zipcode">
+        <button class="btn btn-outline-secondary" type="submit">Lookup</button>
       </form>
     </div>
   </div>
@@ -54,23 +65,13 @@
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'about' %}" class="nav-link p-0 text-muted">About</a></li>
         </ul>
       </div>
 
 
 
-      <div class="col-3 offset-1">
-        <form>
-          <h5>Subscribe to our newsletter</h5>
-          <p>Monthly digest of whats new and exciting from us.</p>
-          <div class="d-flex w-100 gap-2">
-            <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-            <button class="btn btn-primary" type="button">Subscribe</button>
-          </div>
-        </form>
-      </div>
+
     </div>
 
 
