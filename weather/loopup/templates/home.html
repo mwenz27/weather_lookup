@@ -2,19 +2,47 @@
 
 {% block content %}
 
-<h1>Weather Quality </h1>
+
+
+
 {% if api %}
     {% if api == 'Error ...' %}
         There is an error, please try again.
     {% else %}
-    <br>
-    Air Quality :  {{ api.0.AQI }}
-    <br>
-    Area :  {{ api.0.ReportingArea }}
-    <br>
-    Category : {{ api.0.Category.Name }}
-    <br>
-    {% endif %}
+
+        <h1>Weather Quality </h1>
+        <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">{{ api.0.Category.Name }}</h1>
+                <p class="col-md-8 fs-4">Location :  {{ api.0.ReportingArea }}
+                    <br> Air Quality :  {{ api.0.AQI }}
+                    <br> Date Observed :  {{ api.0.DateObserved }}
+                </p>
+
+            {% if  api.0.Category.Name == "Good" %}
+                <p class="col-md-8 fs-4">0 to 50	Air quality is satisfactory, and air pollution poses little or no risk.</p>
+
+            {% elif  api.0.Category.Name == "Moderate" %}
+                <p class="col-md-8 fs-4">51 to 100	Air quality is acceptable. However, there may be a risk for some people, particularly those who are unusually sensitive to air pollution.</p>
+
+            {% elif  api.0.Category.Name == "Unhealthy for Sensitive Groups" %}
+                <p class="col-md-8 fs-4">101 to 150	Members of sensitive groups may experience health effects. The general public is less likely to be affected.</p>
+
+            {% elif  api.0.Category.Name == "Unhealthy" %}
+                <p class="col-md-8 fs-4">151 to 200	Some members of the general public may experience health effects; members of sensitive groups may experience more serious health effects.</p>
+
+            {% elif  api.0.Category.Name == "Very Unhealthy" %}
+                <p class="col-md-8 fs-4">Health alert: The risk of health effects is increased for everyone.</p>
+
+            {% elif  api.0.Category.Name == "Hazardous" %}
+                <p class="col-md-8 fs-4">Health warning of emergency conditions: everyone is more likely to be affected.</p>
+
+            {% else %}
+                <p class="col-md-8 fs-4">error in api call</p>
+
+            {% endif %}
+        </div>
+   {% endif %}
+
 {% endif %}
 
 
